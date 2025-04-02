@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prom Event Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-crown"></i> Prom Night 2024</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#voting">Voting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tickets">Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#outfits">Outfits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#photos">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#awards">Awards</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 text-white">Welcome to Prom Night 2024</h1>
+                    <p class="lead text-white">The most magical night of the year</p>
+                    <div id="countdown" class="countdown-timer">
+                        <!-- Countdown will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voting Section -->
+    <section id="voting" class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">🗳️ Voting System</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Prom King & Queen Voting</h5>
+                            <div class="voting-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Select Prom King</label>
+                                    <select class="form-select" id="kingVote">
+                                        <option value="">Choose a candidate...</option>
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Select Prom Queen</label>
+                                    <select class="form-select" id="queenVote">
+                                        <option value="">Choose a candidate...</option>
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="submitVote()">Submit Vote</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Live Results</h5>
+                            <div class="results-display">
+                                <!-- Results will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticket Management Section -->
+    <section id="tickets" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">🎟️ Ticket Management</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Purchase Tickets</h5>
+                            <div class="ticket-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Number of Tickets</label>
+                                    <input type="number" class="form-control" id="ticketCount" min="1" max="4">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Seating Preference</label>
+                                    <select class="form-select" id="seatingPreference">
+                                        <option value="general">General Seating</option>
+                                        <option value="vip">VIP Seating</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="purchaseTickets()">Purchase Tickets</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Your Tickets</h5>
+                            <div id="ticketDisplay">
+                                <!-- Tickets will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outfit Showcase Section -->
+    <section id="outfits" class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">💃 Dress Code & Outfit Showcases</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Upload Your Outfit</h5>
+                            <form id="outfitUploadForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Outfit Photo</label>
+                                    <input type="file" class="form-control" id="outfitPhoto" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Outfit Gallery</h5>
+                            <div class="outfit-gallery" id="outfitGallery">
+                                <!-- Outfit photos will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Booth Section -->
+    <section id="photos" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">📸 Photo Booth & Social Wall</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Upload Prom Photos</h5>
+                            <form id="photoUploadForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Photo</label>
+                                    <input type="file" class="form-control" id="promPhoto" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Social Wall</h5>
+                            <div class="social-wall" id="socialWall">
+                                <!-- Social media feed will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">🏆 Awards & Recognition</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Vote for Superlatives</h5>
+                            <div class="superlatives-form">
+                                <!-- Superlatives voting form will be here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Winners</h5>
+                            <div class="winners-display">
+                                <!-- Winners will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Prom Night 2024</h5>
+                    <p>Creating memories that last a lifetime</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Contact Us</h5>
+                    <p>Email: prom@school.edu<br>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
